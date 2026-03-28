@@ -95,7 +95,7 @@ export default function MatrixScreen() {
       </Box>
 
       {/* Legend */}
-      <HStack px="$3" py="$1" space="sm" flexWrap="wrap">
+      <HStack px="$3" py="$1" gap="$2" flexWrap="wrap">
         {[
           { label: 'Ag', color: '#22c55e' },
           { label: 'PAg', color: '#86efac' },
@@ -104,14 +104,14 @@ export default function MatrixScreen() {
           { label: 'NAM', color: '#ef4444' },
           { label: 'Inh', color: '#f97316' },
         ].map((l) => (
-          <HStack key={l.label} alignItems="center" space="xs" mr="$2">
+          <HStack key={l.label} alignItems="center" gap="$1" mr="$2">
             <View style={[styles.legendDot, { backgroundColor: l.color }]} />
             <Text fontSize="$2xs" color="$textLight500">
               {l.label}
             </Text>
           </HStack>
         ))}
-        <HStack alignItems="center" space="xs">
+        <HStack alignItems="center" gap="$1">
           <View style={[styles.legendDot, { backgroundColor: '#22c55e', borderWidth: 1.5, borderColor: '#166534' }]} />
           <Text fontSize="$2xs" color="$textLight500">
             = has potency

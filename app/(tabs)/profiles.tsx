@@ -36,7 +36,7 @@ export default function ProfilesScreen() {
     <Box flex={1} bg="$backgroundLight50">
       <Box p="$4" pb="$2">
         <SearchBar value={query} onChangeText={setQuery} placeholder="Search profiles..." />
-        <HStack space="sm" mt="$2">
+        <HStack gap="$2" mt="$2">
           {TYPE_FILTERS.map((t) => (
             <Button
               key={t}

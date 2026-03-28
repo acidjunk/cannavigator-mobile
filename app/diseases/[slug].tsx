@@ -30,7 +30,7 @@ export default function DiseaseDetailScreen() {
     <>
       <Stack.Screen options={{ title: disease.display_name }} />
       <ScrollView style={{ flex: 1, backgroundColor: '#fafafa' }}>
-        <VStack p="$4" space="lg">
+        <VStack p="$4" gap="$4">
           {/* Header */}
           <Box>
             <Heading size="xl" color="$textDark900">
@@ -60,7 +60,7 @@ export default function DiseaseDetailScreen() {
                     borderBottomWidth={1}
                     borderBottomColor="$borderLight100"
                   >
-                    <HStack alignItems="center" space="sm" flex={1}>
+                    <HStack alignItems="center" gap="$2" flex={1}>
                       <TargetBadge name={dt.target.display_name} type={dt.target.type} />
                       {dt.role && (
                         <Text fontSize="$xs" color="$textLight500">
@@ -125,7 +125,7 @@ export default function DiseaseDetailScreen() {
                   borderBottomWidth={1}
                   borderBottomColor="$borderLight100"
                 >
-                  <HStack alignItems="center" space="sm" flexWrap="wrap">
+                  <HStack alignItems="center" gap="$2" flexWrap="wrap">
                     <Text fontSize="$sm" fontWeight="$medium" color="$textDark800">
                       {de.target.display_name}
                     </Text>

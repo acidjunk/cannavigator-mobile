@@ -27,7 +27,7 @@ export function LigandCard({ card, onPress }: LigandCardProps) {
       borderColor="$borderLight200"
       sx={{ ':active': { bg: '$backgroundLight100' } }}
     >
-      <VStack space="sm">
+      <VStack gap="$1">
         <HStack justifyContent="space-between" alignItems="center">
           <Text fontWeight="$bold" fontSize="$md" color="$textDark900" flex={1}>
             {card.ligand_display_name}
@@ -37,32 +37,32 @@ export function LigandCard({ card, onPress }: LigandCardProps) {
           </Badge>
         </HStack>
 
-        {dc?.headline && (
+        {dc?.headline ? (
           <Text fontSize="$sm" fontWeight="$medium" color="$textDark700" numberOfLines={1}>
             {dc.headline}
           </Text>
-        )}
+        ) : null}
 
-        {dc?.tagline && (
+        {dc?.tagline ? (
           <Text fontSize="$xs" color="$textLight500" numberOfLines={2}>
             {dc.tagline}
           </Text>
-        )}
+        ) : null}
 
-        {dc?.disease_relevance && dc.disease_relevance.length > 0 && (
-          <HStack flexWrap="wrap" space="xs" mt="$1">
+        {dc?.disease_relevance && dc.disease_relevance.length > 0 ? (
+          <HStack flexWrap="wrap" gap="$1" mt="$1">
             {dc.disease_relevance.slice(0, 3).map((tag) => (
               <Badge key={tag} size="sm" variant="outline" action="muted" borderRadius="$full">
                 <BadgeText fontSize="$2xs">{tag}</BadgeText>
               </Badge>
             ))}
-            {dc.disease_relevance.length > 3 && (
+            {dc.disease_relevance.length > 3 ? (
               <Text fontSize="$2xs" color="$textLight400">
                 +{dc.disease_relevance.length - 3} more
               </Text>
-            )}
+            ) : null}
           </HStack>
-        )}
+        ) : null}
       </VStack>
     </Pressable>
   );

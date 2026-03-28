@@ -13,7 +13,6 @@ import {
 } from '@gluestack-ui/themed';
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { useLigandProfile, useLigandDiseases } from '../../src/hooks/useLigands';
-import { TargetBadge } from '../../src/components/TargetBadge';
 import { LoadingState } from '../../src/components/LoadingState';
 import { ErrorState } from '../../src/components/ErrorState';
 
@@ -32,23 +31,23 @@ export default function ProfileDetailScreen() {
     <>
       <Stack.Screen options={{ title: slug }} />
       <ScrollView style={{ flex: 1, backgroundColor: '#fafafa' }}>
-        <VStack p="$4" space="lg">
+        <VStack p="$4" gap="$4">
           {/* Dashboard Card */}
-          {dc && (
+          {dc ? (
             <Box bg="$primary50" p="$4" borderRadius="$lg" borderWidth={1} borderColor="$primary200">
-              {dc.headline && (
+              {dc.headline ? (
                 <Heading size="md" color="$primary800" mb="$1">
                   {dc.headline}
                 </Heading>
-              )}
-              {dc.tagline && (
+              ) : null}
+              {dc.tagline ? (
                 <Text fontSize="$sm" color="$primary600" mb="$3">
                   {dc.tagline}
                 </Text>
-              )}
+              ) : null}
 
               {/* Top Targets */}
-              {dc.top_targets && dc.top_targets.length > 0 && (
+              {dc.top_targets && dc.top_targets.length > 0 ? (
                 <Box mb="$3">
                   <Text fontWeight="$semibold" fontSize="$xs" color="$textDark700" mb="$1">
                     Top Targets
@@ -58,44 +57,44 @@ export default function ProfileDetailScreen() {
                       <Text fontSize="$sm" fontWeight="$medium" color="$textDark800">
                         {t.target}
                       </Text>
-                      <HStack space="sm">
-                        {t.potency && (
+                      <HStack gap="$2">
+                        {t.potency ? (
                           <Text fontSize="$2xs" color="$textLight500">
                             {t.potency}
                           </Text>
-                        )}
-                        {t.comment && (
+                        ) : null}
+                        {t.comment ? (
                           <Text fontSize="$2xs" color="$textLight500">
                             {t.comment}
                           </Text>
-                        )}
+                        ) : null}
                       </HStack>
                     </Box>
                   ))}
                 </Box>
-              )}
+              ) : null}
 
               {/* Disease Relevance Tags */}
-              {dc.disease_relevance && dc.disease_relevance.length > 0 && (
-                <HStack flexWrap="wrap" space="xs">
+              {dc.disease_relevance && dc.disease_relevance.length > 0 ? (
+                <HStack flexWrap="wrap" gap="$1">
                   {dc.disease_relevance.map((tag) => (
                     <Badge key={tag} size="sm" action="success" borderRadius="$full" mb="$1">
                       <BadgeText fontSize="$2xs">{tag}</BadgeText>
                     </Badge>
                   ))}
                 </HStack>
-              )}
+              ) : null}
             </Box>
-          )}
+          ) : null}
 
           {/* Mechanistic Highlights */}
-          {dc?.mechanistic_highlights && dc.mechanistic_highlights.length > 0 && (
+          {dc?.mechanistic_highlights && dc.mechanistic_highlights.length > 0 ? (
             <Box bg="$white" p="$4" borderRadius="$lg" borderWidth={1} borderColor="$borderLight200">
               <Heading size="sm" color="$textDark700" mb="$3">
                 Mechanistic Highlights
               </Heading>
               {dc.mechanistic_highlights.map((h, i) => (
-                <HStack key={i} space="sm" mb="$2" alignItems="flex-start">
+                <HStack key={i} gap="$2" mb="$2" alignItems="flex-start">
                   <Text color="$primary500" fontSize="$sm">
                     {'\u2022'}
                   </Text>
@@ -105,37 +104,38 @@ export default function ProfileDetailScreen() {
                 </HStack>
               ))}
             </Box>
-          )}
+          ) : null}
 
           {/* Summary Sections */}
-          {profile.summary &&
-            Object.entries(profile.summary).map(([key, section]) => (
-              <Box
-                key={key}
-                bg="$white"
-                p="$4"
-                borderRadius="$lg"
-                borderWidth={1}
-                borderColor="$borderLight200"
-              >
-                <Heading size="sm" color="$textDark700" mb="$3">
-                  {section.title}
-                </Heading>
-                {section.bullets.map((b, i) => (
-                  <HStack key={i} space="sm" mb="$2" alignItems="flex-start">
-                    <Text color="$primary500" fontSize="$sm">
-                      {'\u2022'}
-                    </Text>
-                    <Text fontSize="$sm" color="$textDark600" flex={1}>
-                      {b}
-                    </Text>
-                  </HStack>
-                ))}
-              </Box>
-            ))}
+          {profile.summary
+            ? Object.entries(profile.summary).map(([key, section]) => (
+                <Box
+                  key={key}
+                  bg="$white"
+                  p="$4"
+                  borderRadius="$lg"
+                  borderWidth={1}
+                  borderColor="$borderLight200"
+                >
+                  <Heading size="sm" color="$textDark700" mb="$3">
+                    {section.title}
+                  </Heading>
+                  {section.bullets.map((b, i) => (
+                    <HStack key={i} gap="$2" mb="$2" alignItems="flex-start">
+                      <Text color="$primary500" fontSize="$sm">
+                        {'\u2022'}
+                      </Text>
+                      <Text fontSize="$sm" color="$textDark600" flex={1}>
+                        {b}
+                      </Text>
+                    </HStack>
+                  ))}
+                </Box>
+              ))
+            : null}
 
           {/* Linked Diseases */}
-          {linkedDiseases && linkedDiseases.length > 0 && (
+          {linkedDiseases && linkedDiseases.length > 0 ? (
             <Box bg="$white" p="$4" borderRadius="$lg" borderWidth={1} borderColor="$borderLight200">
               <Heading size="sm" color="$textDark700" mb="$3">
                 Linked Diseases ({linkedDiseases.length})
@@ -154,7 +154,7 @@ export default function ProfileDetailScreen() {
                 </Pressable>
               ))}
             </Box>
-          )}
+          ) : null}
         </VStack>
       </ScrollView>
     </>

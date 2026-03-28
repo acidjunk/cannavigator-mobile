@@ -40,7 +40,7 @@ export default function SettingsScreen() {
 
   return (
     <Box flex={1} bg="$backgroundLight50" p="$4">
-      <VStack space="lg">
+      <VStack gap="$4">
         <Heading size="lg" color="$textDark900">
           Settings
         </Heading>
@@ -64,7 +64,7 @@ export default function SettingsScreen() {
           </Input>
         </Box>
 
-        <HStack space="sm">
+        <HStack gap="$2">
           <Button onPress={handleSave} action="primary" flex={1}>
             <ButtonText>Save</ButtonText>
           </Button>
