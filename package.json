@@ -1,21 +1,42 @@
 {
-  "name": "cannavigator-mobile-tmp",
+  "name": "cannavigator-mobile",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "jest"
   },
   "dependencies": {
+    "@gluestack-style/react": "^1.0.57",
+    "@gluestack-ui/config": "^1.1.20",
+    "@gluestack-ui/themed": "^1.1.73",
+    "@react-native-async-storage/async-storage": "^3.0.2",
+    "@tanstack/react-query": "^5.95.2",
+    "axios": "^1.14.0",
     "expo": "55.0.10-canary-20260327-0789fbc",
+    "expo-constants": "55.0.10-canary-20260327-0789fbc",
+    "expo-linking": "55.0.10-canary-20260327-0789fbc",
+    "expo-router": "55.0.9-canary-20260327-0789fbc",
     "expo-status-bar": "55.0.5-canary-20260327-0789fbc",
+    "expo-system-ui": "55.0.12-canary-20260327-0789fbc",
+    "lucide-react-native": "^1.7.0",
     "react": "19.2.0",
-    "react-native": "0.83.4"
+    "react-dom": "^19.2.4",
+    "react-native": "0.83.4",
+    "react-native-safe-area-context": "~5.6.2",
+    "react-native-screens": "~4.23.0",
+    "react-native-svg": "^15.15.4"
   },
   "devDependencies": {
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^13.3.3",
+    "@types/jest": "^30.0.0",
     "@types/react": "~19.2.2",
+    "jest": "^30.3.0",
+    "jest-expo": "^55.0.12-canary-20260327-0789fbc",
     "typescript": "~5.9.2"
   },
   "private": true
