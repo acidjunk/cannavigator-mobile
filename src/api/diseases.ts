@@ -1,6 +1,6 @@
 import apiClient from './client';
 import { Disease, DiseaseDetail } from '../types/disease';
-import { ProductDiseaseScore } from '../types/product';
+import { DiseaseProductScore } from '../types/product';
 
 export async function fetchDiseases(params?: { q?: string; limit?: number }): Promise<Disease[]> {
   const { data } = await apiClient.get<Disease[]>('/diseases', {
@@ -14,7 +14,7 @@ export async function fetchDiseaseDetail(slug: string): Promise<DiseaseDetail> {
   return data;
 }
 
-export async function fetchDiseaseProducts(slug: string): Promise<ProductDiseaseScore[]> {
-  const { data } = await apiClient.get<ProductDiseaseScore[]>(`/diseases/${slug}/products`);
+export async function fetchDiseaseProducts(slug: string): Promise<DiseaseProductScore[]> {
+  const { data } = await apiClient.get<DiseaseProductScore[]>(`/diseases/${slug}/products`);
   return data;
 }

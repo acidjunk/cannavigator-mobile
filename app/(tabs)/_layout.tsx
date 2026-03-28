@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { Search, Activity, Leaf, Settings } from 'lucide-react-native';
+import { Search, Activity, Leaf, Grid3X3, Settings } from 'lucide-react-native';
 
 export default function TabLayout() {
   return (
@@ -32,6 +32,13 @@ export default function TabLayout() {
         options={{
           title: 'Profiles',
           tabBarIcon: ({ color, size }) => <Leaf color={color} size={size} />,
+        }}
+      />
+      <Tabs.Screen
+        name="matrix"
+        options={{
+          title: 'Matrix',
+          tabBarIcon: ({ color, size }) => <Grid3X3 color={color} size={size} />,
         }}
       />
       <Tabs.Screen

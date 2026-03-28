@@ -156,13 +156,13 @@ export default function DiseaseDetailScreen() {
                 .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
                 .map((ps) => (
                   <Box
-                    key={ps.disease.id}
+                    key={ps.product.id}
                     py="$3"
                     borderBottomWidth={1}
                     borderBottomColor="$borderLight100"
                   >
                     <Text fontWeight="$medium" fontSize="$sm" color="$textDark800" mb="$1">
-                      {ps.disease.display_name}
+                      {ps.product.display_name}
                     </Text>
                     <ScoreBar score={ps.score} aligned={ps.aligned_count} counter={ps.counter_count} />
                   </Box>
