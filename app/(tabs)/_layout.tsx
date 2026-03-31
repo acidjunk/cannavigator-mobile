@@ -1,15 +1,17 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { Search, Activity, Leaf, Grid3X3, Settings } from 'lucide-react-native';
+import { brand } from '../../src/theme/colors';
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#16a34a',
-        tabBarInactiveTintColor: '#9ca3af',
-        headerStyle: { backgroundColor: '#16a34a' },
-        headerTintColor: '#fff',
+        tabBarActiveTintColor: brand.lightSage,
+        tabBarInactiveTintColor: brand.whiteSubtle,
+        tabBarStyle: { backgroundColor: brand.darkGreen, borderTopColor: 'rgba(255,255,255,0.1)' },
+        headerStyle: { backgroundColor: brand.darkGreen },
+        headerTintColor: brand.white,
         headerTitleStyle: { fontWeight: 'bold' },
       }}
     >

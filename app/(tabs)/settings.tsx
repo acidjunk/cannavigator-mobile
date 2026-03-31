@@ -81,7 +81,7 @@ export default function SettingsScreen() {
 
         <Box mt="$8" p="$4" bg="$white" borderRadius="$lg" borderWidth={1} borderColor="$borderLight200">
           <Text fontWeight="$semibold" color="$textDark700" mb="$1">
-            Cannavigator Mobile
+            Autoleaf Cannavigator Mobile
           </Text>
           <Text fontSize="$xs" color="$textLight500">
             Version 1.0.0

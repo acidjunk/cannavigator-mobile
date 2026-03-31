@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#F5F7F5',
   },
   cornerCell: {
     width: ROW_HEADER_WIDTH,
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     height: CELL_HEIGHT,
     justifyContent: 'center',
     paddingHorizontal: 4,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#F5F7F5',
     borderRightWidth: 1,
     borderRightColor: '#e5e7eb',
   },

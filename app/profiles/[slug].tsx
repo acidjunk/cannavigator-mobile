@@ -15,6 +15,7 @@ import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { useLigandProfile, useLigandDiseases } from '../../src/hooks/useLigands';
 import { LoadingState } from '../../src/components/LoadingState';
 import { ErrorState } from '../../src/components/ErrorState';
+import { brand } from '../../src/theme/colors';
 
 export default function ProfileDetailScreen() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
@@ -30,18 +31,18 @@ export default function ProfileDetailScreen() {
   return (
     <>
       <Stack.Screen options={{ title: slug }} />
-      <ScrollView style={{ flex: 1, backgroundColor: '#fafafa' }}>
+      <ScrollView style={{ flex: 1, backgroundColor: '#F5F7F5' }}>
         <VStack p="$4" gap="$4">
           {/* Dashboard Card */}
           {dc ? (
-            <Box bg="$primary50" p="$4" borderRadius="$lg" borderWidth={1} borderColor="$primary200">
+            <Box bg={`${brand.sage}15`} p="$4" borderRadius="$lg" borderWidth={1} borderColor={`${brand.sage}40`}>
               {dc.headline ? (
-                <Heading size="md" color="$primary800" mb="$1">
+                <Heading size="md" color={brand.darkGreen} mb="$1">
                   {dc.headline}
                 </Heading>
               ) : null}
               {dc.tagline ? (
-                <Text fontSize="$sm" color="$primary600" mb="$3">
+                <Text fontSize="$sm" color={brand.sage} mb="$3">
                   {dc.tagline}
                 </Text>
               ) : null}
@@ -95,7 +96,7 @@ export default function ProfileDetailScreen() {
               </Heading>
               {dc.mechanistic_highlights.map((h, i) => (
                 <HStack key={i} gap="$2" mb="$2" alignItems="flex-start">
-                  <Text color="$primary500" fontSize="$sm">
+                  <Text color={brand.sage} fontSize="$sm">
                     {'\u2022'}
                   </Text>
                   <Text fontSize="$sm" color="$textDark600" flex={1}>
@@ -122,7 +123,7 @@ export default function ProfileDetailScreen() {
                   </Heading>
                   {section.bullets.map((b, i) => (
                     <HStack key={i} gap="$2" mb="$2" alignItems="flex-start">
-                      <Text color="$primary500" fontSize="$sm">
+                      <Text color={brand.sage} fontSize="$sm">
                         {'\u2022'}
                       </Text>
                       <Text fontSize="$sm" color="$textDark600" flex={1}>
@@ -148,7 +149,7 @@ export default function ProfileDetailScreen() {
                   borderBottomWidth={1}
                   borderBottomColor="$borderLight100"
                 >
-                  <Text fontSize="$sm" color="$primary700" fontWeight="$medium">
+                  <Text fontSize="$sm" color={brand.sage} fontWeight="$medium">
                     {d.display_name}
                   </Text>
                 </Pressable>

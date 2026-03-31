@@ -8,7 +8,7 @@ interface LoadingStateProps {
 export function LoadingState({ message = 'Loading...' }: LoadingStateProps) {
   return (
     <Box flex={1} justifyContent="center" alignItems="center" p="$8">
-      <Spinner size="large" color="$primary500" />
+      <Spinner size="large" color="#6B8F71" />
       <Text mt="$3" color="$textLight500" fontSize="$sm">
         {message}
       </Text>

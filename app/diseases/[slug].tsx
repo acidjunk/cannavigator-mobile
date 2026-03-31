@@ -16,6 +16,7 @@ import { EffectChip } from '../../src/components/EffectChip';
 import { ScoreBar } from '../../src/components/ScoreBar';
 import { LoadingState } from '../../src/components/LoadingState';
 import { ErrorState } from '../../src/components/ErrorState';
+import { brand } from '../../src/theme/colors';
 
 export default function DiseaseDetailScreen() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
@@ -29,7 +30,7 @@ export default function DiseaseDetailScreen() {
   return (
     <>
       <Stack.Screen options={{ title: disease.display_name }} />
-      <ScrollView style={{ flex: 1, backgroundColor: '#fafafa' }}>
+      <ScrollView style={{ flex: 1, backgroundColor: '#F5F7F5' }}>
         <VStack p="$4" gap="$4">
           {/* Header */}
           <Box>
@@ -37,7 +38,7 @@ export default function DiseaseDetailScreen() {
               {disease.display_name}
             </Heading>
             {disease.source_url && (
-              <Text fontSize="$xs" color="$primary600" mt="$1">
+              <Text fontSize="$xs" color={brand.sage} mt="$1">
                 {disease.source_url}
               </Text>
             )}
@@ -94,7 +95,7 @@ export default function DiseaseDetailScreen() {
                   >
                     <HStack justifyContent="space-between" alignItems="center">
                       <VStack flex={1}>
-                        <Text fontWeight="$medium" color="$primary700" fontSize="$sm">
+                        <Text fontWeight="$medium" color={brand.sage} fontSize="$sm">
                           {dl.ligand.display_name}
                         </Text>
                         {dl.category && (

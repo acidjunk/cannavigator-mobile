@@ -3,6 +3,7 @@ import { Stack } from 'expo-router';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { brand } from '../src/theme/colors';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,8 +20,8 @@ export default function RootLayout() {
       <QueryClientProvider client={queryClient}>
         <Stack
           screenOptions={{
-            headerStyle: { backgroundColor: '#16a34a' },
-            headerTintColor: '#fff',
+            headerStyle: { backgroundColor: brand.darkGreen },
+            headerTintColor: brand.white,
             headerTitleStyle: { fontWeight: 'bold' },
           }}
         >
