@@ -7,7 +7,7 @@ import { brand } from '../../src/theme/colors';
 const HeaderLogo = () => (
   <Image
     source={require('../../assets/logo-white.png')}
-    style={{ width: 100, height: 26, marginLeft: 12, marginRight: 8, resizeMode: 'contain' }}
+    style={{ width: 188, height: 40, marginLeft: 4, marginRight: 4, resizeMode: 'contain' }}
   />
 );
 
