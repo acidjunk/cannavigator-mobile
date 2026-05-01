@@ -6,4 +6,19 @@ minimumReleaseAge: 10080
 # Add packages here to exempt them from the 7-day delay (e.g. when
 # `pnpm audit --fix` needs to install a same-day security patch).
 # `pnpm audit --fix` will auto-append advisory-fix versions here.
-minimumReleaseAgeExclude: []
+#
+# expo + the SDK family + react-native* are temporarily excluded so
+# `expo install --fix` can pull the latest patch of the SDK 54 set
+# (sometimes published <7 days ago when Expo cuts a hotfix). Once the
+# lockfile is committed these versions are pinned, so the exclusion
+# only matters at migration time — but leaving the rules in place
+# makes future SDK upgrades smoother.
+minimumReleaseAgeExclude:
+  - 'expo'
+  - 'expo-*'
+  - '@expo/*'
+  - 'react'
+  - 'react-dom'
+  - 'react-native'
+  - 'react-native-*'
+  - 'jest-expo'
