@@ -2,9 +2,8 @@ import React from 'react';
 import { Stack } from 'expo-router';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { brand } from '../src/theme/colors';
 import { gluestackConfig } from '../src/theme/gluestack';
-import { HeaderLogo } from '../src/components/HeaderLogo';
+import { AppHeader } from '../src/components/AppHeader';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,10 +20,8 @@ export default function RootLayout() {
       <QueryClientProvider client={queryClient}>
         <Stack
           screenOptions={{
-            headerStyle: { backgroundColor: brand.darkGreen },
-            headerTintColor: brand.white,
-            headerTitleStyle: { fontWeight: 'bold' },
-            headerLeft: () => <HeaderLogo />,
+            // Custom header — see src/components/AppHeader.tsx.
+            header: ({ options, back }) => <AppHeader title={options.title} showBack={!!back} />,
           }}
         >
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
