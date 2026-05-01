@@ -16,7 +16,10 @@ export function HeaderLogo() {
     >
       <Image
         source={require('../../assets/logo-white.png')}
-        style={{ width: 188, height: 40, resizeMode: 'contain' }}
+        // The white logo PNG is ~1.25:1 (1075x860). Sizing the box to match
+        // that ratio keeps the visible mark flush with the Pressable's left
+        // edge instead of letterboxing inside a wider container.
+        style={{ width: 60, height: 48, resizeMode: 'contain' }}
       />
     </Pressable>
   );
