@@ -15,6 +15,15 @@ export default function TabLayout() {
         headerTintColor: brand.white,
         headerTitleStyle: { fontWeight: 'bold' },
         headerLeft: () => <HeaderLogo />,
+        // Pin the headerLeft slot to the top-left of the header so the logo
+        // hugs the top edge instead of being vertical-centered. Horizontal
+        // alignment with content (16px) is handled inside HeaderLogo itself.
+        headerLeftContainerStyle: {
+          paddingTop: 0,
+          paddingBottom: 0,
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
+        },
       }}
     >
       <Tabs.Screen
