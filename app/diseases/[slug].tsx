@@ -8,7 +8,7 @@ import { EffectChip } from '../../src/components/EffectChip';
 import { ScoreBar } from '../../src/components/ScoreBar';
 import { LoadingState } from '../../src/components/LoadingState';
 import { ErrorState } from '../../src/components/ErrorState';
-import { brand } from '../../src/theme/colors';
+import { brand, colors } from '../../src/theme/colors';
 
 export default function DiseaseDetailScreen() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
@@ -22,7 +22,7 @@ export default function DiseaseDetailScreen() {
   return (
     <>
       <Stack.Screen options={{ title: disease.display_name }} />
-      <ScrollView style={{ flex: 1, backgroundColor: '#F5F7F5' }}>
+      <ScrollView style={{ flex: 1, backgroundColor: colors.cream }}>
         <VStack p="$4" gap="$4">
           {/* Header */}
           <Box>

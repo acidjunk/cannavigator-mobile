@@ -6,6 +6,7 @@ import { LoadingState } from '../../src/components/LoadingState';
 import { ErrorState } from '../../src/components/ErrorState';
 import { useInteractionMatrix } from '../../src/hooks/useInteractions';
 import { InteractionMatrixCell } from '../../src/types/interaction';
+import { colors } from '../../src/theme/colors';
 
 const CELL_WIDTH = 56;
 const CELL_HEIGHT = 44;
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
-    backgroundColor: '#F5F7F5',
+    backgroundColor: colors.cream,
   },
   cornerCell: {
     width: ROW_HEADER_WIDTH,
@@ -204,7 +205,7 @@ const styles = StyleSheet.create({
     height: CELL_HEIGHT,
     justifyContent: 'center',
     paddingHorizontal: 4,
-    backgroundColor: '#F5F7F5',
+    backgroundColor: colors.cream,
     borderRightWidth: 1,
     borderRightColor: '#e5e7eb',
   },

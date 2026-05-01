@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { FlatList, Image } from 'react-native';
+import { FlatList } from 'react-native';
 import {
   Box,
   Text,
@@ -18,7 +18,7 @@ import { LigandCard } from '../../src/components/LigandCard';
 import { LoadingState } from '../../src/components/LoadingState';
 import { useDiseases, useDiseaseDetail } from '../../src/hooks/useDiseases';
 import { useLigandProfileCards } from '../../src/hooks/useLigands';
-import { brand, topics } from '../../src/theme/colors';
+import { topics } from '../../src/theme/colors';
 
 interface QuickTopic {
   label: string;
@@ -270,21 +270,6 @@ export default function HomeScreen() {
   return (
     <Box flex={1} bg="$backgroundLight50">
       <Box p="$4" pb="$2">
-        <HStack alignItems="center" gap="$3" mb="$1">
-          <Image
-            source={require('../../assets/logo.png')}
-            style={{ width: 44, height: 44, borderRadius: 8 }}
-            resizeMode="contain"
-          />
-          <VStack>
-            <Heading size="lg" color={brand.textDark}>
-              Autoleaf
-            </Heading>
-            <Text color={brand.textMuted} fontSize="$xs">
-              Cannabis pharmacology navigator
-            </Text>
-          </VStack>
-        </HStack>
         <SearchBar
           value={query}
           onChangeText={(t) => {
