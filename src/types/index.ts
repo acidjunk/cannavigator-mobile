@@ -1,12 +1,29 @@
 export type {
   Disease,
+  DiseaseProfile,
   DiseaseDetail,
-  DiseaseTarget,
-  DiseaseLigand,
+  DiseaseLigandMention,
+  DiseaseTargetMention,
   DesiredEffect,
   Target,
   Ligand,
+  PaperRef,
+  PaperConclusion,
+  LigandDiseaseClaim,
+  TargetDiseaseClaim,
+  ClaimDirection,
+  EvidenceLevel,
+  PublicationType,
 } from './disease';
-export type { LigandProfileCard, LigandProfile, DashboardCard } from './ligand';
-export type { Product, ProductDiseaseScore, DiseaseProductScore } from './product';
-export type { Interaction, InteractionMatrixCell, InteractionMatrixRow } from './interaction';
+
+export type {
+  LigandProfile,
+  LigandTargetMention,
+  LigandDiseaseMention,
+  Relation,
+  RelationType,
+  InteractionWithNames,
+} from './ligand';
+
+export type { Product } from './product';
+export type { InteractionMatrixCell, InteractionMatrixRow } from './interaction';

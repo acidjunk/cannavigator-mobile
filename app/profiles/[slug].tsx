@@ -1,18 +1,8 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
-import {
-  Box,
-  Text,
-  Heading,
-  VStack,
-  HStack,
-  Badge,
-  BadgeText,
-  Divider,
-  Pressable,
-} from '@gluestack-ui/themed';
+import { Box, Text, Heading, VStack, HStack, Pressable } from '@gluestack-ui/themed';
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
-import { useLigandProfile, useLigandDiseases } from '../../src/hooks/useLigands';
+import { useLigandProfile } from '../../src/hooks/useLigands';
 import { LoadingState } from '../../src/components/LoadingState';
 import { ErrorState } from '../../src/components/ErrorState';
 import { brand, colors } from '../../src/theme/colors';
@@ -21,81 +11,44 @@ export default function ProfileDetailScreen() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
   const router = useRouter();
   const { data: profile, isLoading, isError, refetch } = useLigandProfile(slug);
-  const { data: linkedDiseases } = useLigandDiseases(slug);
 
   if (isLoading) return <LoadingState />;
   if (isError || !profile) return <ErrorState message="Failed to load profile" onRetry={refetch} />;
 
-  const dc = profile.dashboard_card;
-
   return (
     <>
-      <Stack.Screen options={{ title: slug }} />
+      <Stack.Screen options={{ title: profile.display_name }} />
       <ScrollView style={{ flex: 1, backgroundColor: colors.cream }}>
         <VStack p="$4" gap="$4">
-          {/* Dashboard Card */}
-          {dc ? (
-            <Box
-              bg={`${brand.sage}15`}
-              p="$4"
-              borderRadius="$lg"
-              borderWidth={1}
-              borderColor={`${brand.sage}40`}
-            >
-              {dc.headline ? (
-                <Heading size="md" color={brand.darkGreen} mb="$1">
-                  {dc.headline}
-                </Heading>
-              ) : null}
-              {dc.tagline ? (
-                <Text fontSize="$sm" color={brand.sage} mb="$3">
-                  {dc.tagline}
-                </Text>
-              ) : null}
+          {/* Header */}
+          <Box
+            bg={`${brand.sage}15`}
+            p="$4"
+            borderRadius="$lg"
+            borderWidth={1}
+            borderColor={`${brand.sage}40`}
+          >
+            <Heading size="lg" color={brand.darkGreen} mb="$1">
+              {profile.display_name}
+            </Heading>
+            <Text fontSize="$xs" color={brand.sage} mb="$2" textTransform="uppercase">
+              {profile.type}
+              {profile.chemical_family ? ` · ${profile.chemical_family}` : ''}
+            </Text>
+            {profile.tagline ? (
+              <Text fontSize="$sm" color="$textDark700" fontWeight="$medium" mb="$2">
+                {profile.tagline}
+              </Text>
+            ) : null}
+            {profile.short_description ? (
+              <Text fontSize="$sm" color="$textDark600" lineHeight="$lg">
+                {profile.short_description}
+              </Text>
+            ) : null}
+          </Box>
 
-              {/* Top Targets */}
-              {dc.top_targets && dc.top_targets.length > 0 ? (
-                <Box mb="$3">
-                  <Text fontWeight="$semibold" fontSize="$xs" color="$textDark700" mb="$1">
-                    Top Targets
-                  </Text>
-                  {dc.top_targets.map((t, i) => (
-                    <Box key={i} py="$1">
-                      <Text fontSize="$sm" fontWeight="$medium" color="$textDark800">
-                        {t.target}
-                      </Text>
-                      <HStack gap="$2">
-                        {t.potency ? (
-                          <Text fontSize="$2xs" color="$textLight500">
-                            {t.potency}
-                          </Text>
-                        ) : null}
-                        {t.comment ? (
-                          <Text fontSize="$2xs" color="$textLight500">
-                            {t.comment}
-                          </Text>
-                        ) : null}
-                      </HStack>
-                    </Box>
-                  ))}
-                </Box>
-              ) : null}
-
-              {/* Disease Relevance Tags */}
-              {dc.disease_relevance && dc.disease_relevance.length > 0 ? (
-                <HStack flexWrap="wrap" gap="$1">
-                  {dc.disease_relevance.map((tag) => (
-                    <Badge key={tag} size="sm" action="success" borderRadius="$full" mb="$1">
-                      <BadgeText fontSize="$2xs">{tag}</BadgeText>
-                    </Badge>
-                  ))}
-                </HStack>
-              ) : null}
-            </Box>
-          ) : null}
-
-          {/* Mechanistic Highlights */}
-          {dc?.mechanistic_highlights && dc.mechanistic_highlights.length > 0 ? (
+          {/* Targets */}
+          {profile.targets.length > 0 ? (
             <Box
               bg="$white"
               p="$4"
@@ -104,51 +57,76 @@ export default function ProfileDetailScreen() {
               borderColor="$borderLight200"
             >
               <Heading size="sm" color="$textDark700" mb="$3">
-                Mechanistic Highlights
+                Targets ({profile.targets.length})
               </Heading>
-              {dc.mechanistic_highlights.map((h, i) => (
-                <HStack key={i} gap="$2" mb="$2" alignItems="flex-start">
-                  <Text color={brand.sage} fontSize="$sm">
-                    {'\u2022'}
-                  </Text>
-                  <Text fontSize="$sm" color="$textDark600" flex={1}>
-                    {h}
-                  </Text>
-                </HStack>
-              ))}
+              {profile.targets
+                .slice()
+                .sort((a, b) => b.total_mentions - a.total_mentions)
+                .slice(0, 12)
+                .map((tm) => (
+                  <HStack
+                    key={tm.target.id}
+                    justifyContent="space-between"
+                    alignItems="center"
+                    py="$2"
+                    borderBottomWidth={1}
+                    borderBottomColor="$borderLight100"
+                  >
+                    <VStack flex={1}>
+                      <Text fontWeight="$medium" fontSize="$sm" color="$textDark800">
+                        {tm.target.display_name}
+                      </Text>
+                      <Text fontSize="$2xs" color="$textLight500">
+                        {tm.target.type}
+                      </Text>
+                    </VStack>
+                    <Text fontSize="$xs" color="$textLight400">
+                      {tm.paper_count} paper{tm.paper_count === 1 ? '' : 's'}
+                    </Text>
+                  </HStack>
+                ))}
             </Box>
           ) : null}
 
-          {/* Summary Sections */}
-          {profile.summary
-            ? Object.entries(profile.summary).map(([key, section]) => (
-                <Box
-                  key={key}
-                  bg="$white"
-                  p="$4"
-                  borderRadius="$lg"
-                  borderWidth={1}
-                  borderColor="$borderLight200"
-                >
-                  <Heading size="sm" color="$textDark700" mb="$3">
-                    {section.title}
-                  </Heading>
-                  {section.bullets.map((b, i) => (
-                    <HStack key={i} gap="$2" mb="$2" alignItems="flex-start">
-                      <Text color={brand.sage} fontSize="$sm">
-                        {'\u2022'}
+          {/* Diseases (replaces old reverse-route fetch) */}
+          {profile.diseases.length > 0 ? (
+            <Box
+              bg="$white"
+              p="$4"
+              borderRadius="$lg"
+              borderWidth={1}
+              borderColor="$borderLight200"
+            >
+              <Heading size="sm" color="$textDark700" mb="$3">
+                Linked Diseases ({profile.diseases.length})
+              </Heading>
+              {profile.diseases
+                .slice()
+                .sort((a, b) => b.total_mentions - a.total_mentions)
+                .slice(0, 12)
+                .map((dm) => (
+                  <Pressable
+                    key={dm.disease.id}
+                    onPress={() => router.push(`/diseases/${dm.disease.slug}`)}
+                    py="$2"
+                    borderBottomWidth={1}
+                    borderBottomColor="$borderLight100"
+                  >
+                    <HStack justifyContent="space-between" alignItems="center">
+                      <Text fontSize="$sm" color={brand.sage} fontWeight="$medium" flex={1}>
+                        {dm.disease.display_name}
                       </Text>
-                      <Text fontSize="$sm" color="$textDark600" flex={1}>
-                        {b}
+                      <Text fontSize="$xs" color="$textLight400">
+                        {dm.paper_count} paper{dm.paper_count === 1 ? '' : 's'}
                       </Text>
                     </HStack>
-                  ))}
-                </Box>
-              ))
-            : null}
+                  </Pressable>
+                ))}
+            </Box>
+          ) : null}
 
-          {/* Linked Diseases */}
-          {linkedDiseases && linkedDiseases.length > 0 ? (
+          {/* Interactions summary */}
+          {profile.interactions.length > 0 ? (
             <Box
               bg="$white"
               p="$4"
@@ -157,20 +135,25 @@ export default function ProfileDetailScreen() {
               borderColor="$borderLight200"
             >
               <Heading size="sm" color="$textDark700" mb="$3">
-                Linked Diseases ({linkedDiseases.length})
+                Interactions ({profile.interactions.length})
               </Heading>
-              {linkedDiseases.map((d) => (
-                <Pressable
-                  key={d.id}
-                  onPress={() => router.push(`/diseases/${d.slug}`)}
+              {profile.interactions.slice(0, 8).map((it) => (
+                <HStack
+                  key={it.id}
+                  justifyContent="space-between"
+                  alignItems="center"
                   py="$2"
                   borderBottomWidth={1}
                   borderBottomColor="$borderLight100"
                 >
-                  <Text fontSize="$sm" color={brand.sage} fontWeight="$medium">
-                    {d.display_name}
+                  <Text fontSize="$sm" color="$textDark800" flex={1}>
+                    {it.target_display_name}
                   </Text>
-                </Pressable>
+                  <Text fontSize="$xs" color="$textLight500">
+                    {it.effect}
+                    {it.potency_nm ? ` · ${it.potency_nm} nM` : ''}
+                  </Text>
+                </HStack>
               ))}
             </Box>
           ) : null}

@@ -1,15 +1,8 @@
 import React from 'react';
-import { Image } from 'react-native';
 import { Tabs } from 'expo-router';
 import { Search, Activity, Leaf, Grid3X3, Settings } from 'lucide-react-native';
 import { brand } from '../../src/theme/colors';
-
-const HeaderLogo = () => (
-  <Image
-    source={require('../../assets/logo-white.png')}
-    style={{ width: 188, height: 40, marginLeft: 4, marginRight: 4, resizeMode: 'contain' }}
-  />
-);
+import { AppHeader } from '../../src/components/AppHeader';
 
 export default function TabLayout() {
   return (
@@ -18,10 +11,11 @@ export default function TabLayout() {
         tabBarActiveTintColor: brand.lightSage,
         tabBarInactiveTintColor: brand.whiteSubtle,
         tabBarStyle: { backgroundColor: brand.darkGreen, borderTopColor: 'rgba(255,255,255,0.1)' },
-        headerStyle: { backgroundColor: brand.darkGreen },
-        headerTintColor: brand.white,
-        headerTitleStyle: { fontWeight: 'bold' },
-        headerLeft: () => <HeaderLogo />,
+        // Custom header — see src/components/AppHeader.tsx. The default
+        // react-navigation header was applying a margin to its left
+        // container that we couldn't override cleanly via
+        // headerLeftContainerStyle on web.
+        header: ({ options }) => <AppHeader title={options.title} />,
       }}
     >
       <Tabs.Screen

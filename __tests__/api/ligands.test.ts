@@ -1,4 +1,4 @@
-import { fetchLigandProfileCards, fetchLigandProfile } from '../../src/api/ligands';
+import { fetchLigands, fetchLigandProfile } from '../../src/api/ligands';
 
 import apiClient from '../../src/api/client';
 
@@ -16,36 +16,55 @@ describe('ligands API', () => {
     jest.clearAllMocks();
   });
 
-  it('fetchLigandProfileCards calls /ligands/profiles/cards', async () => {
-    const mockCards = [
+  it('fetchLigands calls /ligands', async () => {
+    const mockLigands = [
       {
-        ligand_slug: 'cbd',
-        ligand_display_name: 'CBD',
-        ligand_type: 'Phytocannabinoid',
-        dashboard_card: { headline: 'Test', tagline: 'Test tag' },
+        id: '1',
+        slug: 'cbd',
+        display_name: 'CBD',
+        type: 'Phytocannabinoid',
+        chemical_family: null,
+        synonyms: [],
       },
     ];
-    mockedClient.get.mockResolvedValue({ data: mockCards });
+    mockedClient.get.mockResolvedValue({ data: mockLigands });
 
-    const result = await fetchLigandProfileCards();
+    const result = await fetchLigands();
 
-    expect(mockedClient.get).toHaveBeenCalledWith('/ligands/profiles/cards');
-    expect(result).toEqual(mockCards);
+    expect(mockedClient.get).toHaveBeenCalledWith('/ligands', {
+      params: { type: undefined, q: undefined },
+    });
+    expect(result).toEqual(mockLigands);
   });
 
-  it('fetchLigandProfile calls /ligands/{slug}/profile', async () => {
+  it('fetchLigands passes type filter', async () => {
+    mockedClient.get.mockResolvedValue({ data: [] });
+
+    await fetchLigands({ type: 'Terpene' });
+
+    expect(mockedClient.get).toHaveBeenCalledWith('/ligands', {
+      params: { type: 'Terpene', q: undefined },
+    });
+  });
+
+  it('fetchLigandProfile calls /ligands/{slug}', async () => {
     const mockProfile = {
-      ligand_id: '1',
-      dashboard_card: null,
-      summary: null,
-      ecs_mechanistic: null,
-      evidence_sections: null,
+      id: '1',
+      slug: 'cbd',
+      display_name: 'CBD',
+      type: 'Phytocannabinoid',
+      synonyms: [],
+      targets: [],
+      diseases: [],
+      conclusions: [],
+      paper_count: 0,
+      interactions: [],
     };
     mockedClient.get.mockResolvedValue({ data: mockProfile });
 
     const result = await fetchLigandProfile('cbd');
 
-    expect(mockedClient.get).toHaveBeenCalledWith('/ligands/cbd/profile');
+    expect(mockedClient.get).toHaveBeenCalledWith('/ligands/cbd');
     expect(result).toEqual(mockProfile);
   });
 });
