@@ -1,15 +1,8 @@
 import React from 'react';
-import { Image } from 'react-native';
 import { Tabs } from 'expo-router';
 import { Search, Activity, Leaf, Grid3X3, Settings } from 'lucide-react-native';
 import { brand } from '../../src/theme/colors';
-
-const HeaderLogo = () => (
-  <Image
-    source={require('../../assets/logo-white.png')}
-    style={{ width: 188, height: 40, marginLeft: 4, marginRight: 4, resizeMode: 'contain' }}
-  />
-);
+import { HeaderLogo } from '../../src/components/HeaderLogo';
 
 export default function TabLayout() {
   return (

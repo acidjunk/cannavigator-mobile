@@ -1,10 +1,10 @@
 import React from 'react';
-import { Image } from 'react-native';
 import { Stack } from 'expo-router';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { brand } from '../src/theme/colors';
 import { gluestackConfig } from '../src/theme/gluestack';
+import { HeaderLogo } from '../src/components/HeaderLogo';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -14,13 +14,6 @@ const queryClient = new QueryClient({
     },
   },
 });
-
-const HeaderLogo = () => (
-  <Image
-    source={require('../assets/logo-white.png')}
-    style={{ width: 188, height: 40, marginLeft: 4, marginRight: 4, resizeMode: 'contain' }}
-  />
-);
 
 export default function RootLayout() {
   return (
