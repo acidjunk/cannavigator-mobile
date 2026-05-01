@@ -17,7 +17,7 @@ import { DiseaseCard } from '../../src/components/DiseaseCard';
 import { LigandCard } from '../../src/components/LigandCard';
 import { LoadingState } from '../../src/components/LoadingState';
 import { useDiseases, useDiseaseDetail } from '../../src/hooks/useDiseases';
-import { useLigandProfileCards } from '../../src/hooks/useLigands';
+import { useLigands } from '../../src/hooks/useLigands';
 import { topics } from '../../src/theme/colors';
 
 interface QuickTopic {
@@ -179,7 +179,8 @@ function TopicDetailView({ topic }: { topic: QuickTopic }) {
             Key Compounds
           </Heading>
           {diseaseDetail.ligands
-            .sort((a, b) => b.frequency - a.frequency)
+            .slice()
+            .sort((a, b) => b.total_mentions - a.total_mentions)
             .slice(0, 6)
             .map((dl) => (
               <Pressable
@@ -194,14 +195,14 @@ function TopicDetailView({ topic }: { topic: QuickTopic }) {
                     <Text fontWeight="$medium" fontSize="$sm" color="$primary700">
                       {dl.ligand.display_name}
                     </Text>
-                    {dl.category ? (
+                    {dl.ligand.chemical_family ? (
                       <Text fontSize="$2xs" color="$textLight500">
-                        {dl.category}
+                        {dl.ligand.chemical_family}
                       </Text>
                     ) : null}
                   </VStack>
                   <Badge size="sm" action="info" borderRadius="$full">
-                    <BadgeText fontSize="$2xs">freq: {dl.frequency}</BadgeText>
+                    <BadgeText fontSize="$2xs">{dl.paper_count} papers</BadgeText>
                   </Badge>
                 </HStack>
               </Pressable>
@@ -241,18 +242,18 @@ export default function HomeScreen() {
   const router = useRouter();
 
   const { data: diseases, isLoading: diseasesLoading } = useDiseases(query || undefined);
-  const { data: profileCards, isLoading: profilesLoading } = useLigandProfileCards();
+  const { data: ligands, isLoading: profilesLoading } = useLigands();
 
   const filteredProfiles = useMemo(() => {
-    if (!profileCards || !query) return profileCards?.slice(0, 10) ?? [];
+    if (!ligands || !query) return ligands?.slice(0, 10) ?? [];
     const q = query.toLowerCase();
-    return profileCards.filter(
-      (c) =>
-        c.ligand_display_name.toLowerCase().includes(q) ||
-        c.ligand_slug.toLowerCase().includes(q) ||
-        c.dashboard_card?.headline?.toLowerCase().includes(q),
+    return ligands.filter(
+      (l) =>
+        l.display_name.toLowerCase().includes(q) ||
+        l.slug.toLowerCase().includes(q) ||
+        (l.synonyms ?? []).some((s) => s.toLowerCase().includes(q)),
     );
-  }, [profileCards, query]);
+  }, [ligands, query]);
 
   const isLoading = diseasesLoading || profilesLoading;
   const hasQuery = query.length > 0;
@@ -341,11 +342,11 @@ export default function HomeScreen() {
                   ) : (
                     filteredProfiles
                       .slice(0, 10)
-                      .map((c) => (
+                      .map((l) => (
                         <LigandCard
-                          key={c.ligand_slug}
-                          card={c}
-                          onPress={() => router.push(`/profiles/${c.ligand_slug}`)}
+                          key={l.slug}
+                          ligand={l}
+                          onPress={() => router.push(`/profiles/${l.slug}`)}
                         />
                       ))
                   )}

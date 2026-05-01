@@ -3,51 +3,47 @@ import { render, fireEvent } from '@testing-library/react-native';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
 import { LigandCard } from '../../src/components/LigandCard';
-import { LigandProfileCard } from '../../src/types/ligand';
+import { Ligand } from '../../src/types/disease';
 
 function Wrapper({ children }: { children: React.ReactNode }) {
   return <GluestackUIProvider config={config}>{children}</GluestackUIProvider>;
 }
 
 describe('LigandCard', () => {
-  const card: LigandProfileCard = {
-    ligand_slug: 'cbd',
-    ligand_display_name: 'CBD',
-    ligand_type: 'Phytocannabinoid',
-    dashboard_card: {
-      headline: 'Multi-target modulator',
-      tagline: 'Broad spectrum activity',
-      top_targets: [],
-      mechanistic_highlights: ['Anti-inflammatory'],
-      disease_relevance: ['Epilepsy', 'Pain', 'Anxiety', 'Depression'],
-    },
+  const ligand: Ligand = {
+    id: '1',
+    slug: 'cbd',
+    display_name: 'CBD',
+    type: 'Phytocannabinoid',
+    chemical_family: 'Cannabinoid',
+    synonyms: ['Cannabidiol', 'CBD-A'],
   };
 
-  it('renders ligand name and headline', () => {
+  it('renders ligand name and type', () => {
     const { getByText } = render(
       <Wrapper>
-        <LigandCard card={card} onPress={() => {}} />
+        <LigandCard ligand={ligand} onPress={() => {}} />
       </Wrapper>,
     );
     expect(getByText('CBD')).toBeTruthy();
-    expect(getByText('Multi-target modulator')).toBeTruthy();
+    expect(getByText('Phytocannabinoid')).toBeTruthy();
   });
 
-  it('shows disease relevance tags (max 3) with overflow count', () => {
+  it('renders chemical family and synonyms when present', () => {
     const { getByText } = render(
       <Wrapper>
-        <LigandCard card={card} onPress={() => {}} />
+        <LigandCard ligand={ligand} onPress={() => {}} />
       </Wrapper>,
     );
-    expect(getByText('Epilepsy')).toBeTruthy();
-    expect(getByText('+1 more')).toBeTruthy();
+    expect(getByText('Cannabinoid')).toBeTruthy();
+    expect(getByText('Cannabidiol · CBD-A')).toBeTruthy();
   });
 
   it('calls onPress when pressed', () => {
     const onPress = jest.fn();
     const { getByText } = render(
       <Wrapper>
-        <LigandCard card={card} onPress={onPress} />
+        <LigandCard ligand={ligand} onPress={onPress} />
       </Wrapper>,
     );
     fireEvent.press(getByText('CBD'));

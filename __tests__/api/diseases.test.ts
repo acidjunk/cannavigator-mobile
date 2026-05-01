@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { fetchDiseases, fetchDiseaseDetail, fetchDiseaseProducts } from '../../src/api/diseases';
+import { fetchDiseases, fetchDiseaseDetail } from '../../src/api/diseases';
 
 import apiClient from '../../src/api/client';
 
@@ -24,7 +23,7 @@ describe('diseases API', () => {
     const result = await fetchDiseases();
 
     expect(mockedClient.get).toHaveBeenCalledWith('/diseases', {
-      params: { limit: 500, q: undefined },
+      params: { limit: 500, q: undefined, skip: undefined },
     });
     expect(result).toEqual(mockData);
   });
@@ -35,34 +34,27 @@ describe('diseases API', () => {
     await fetchDiseases({ q: 'epilepsy' });
 
     expect(mockedClient.get).toHaveBeenCalledWith('/diseases', {
-      params: { limit: 500, q: 'epilepsy' },
+      params: { limit: 500, q: 'epilepsy', skip: undefined },
     });
   });
 
   it('fetchDiseaseDetail calls /diseases/{slug}', async () => {
-    const mockDetail = {
+    const mockProfile = {
       id: '1',
       slug: 'epilepsy',
       display_name: 'Epilepsy',
+      synonyms: [],
       targets: [],
       ligands: [],
       desired_effects: [],
+      conclusions: [],
+      paper_count: 0,
     };
-    mockedClient.get.mockResolvedValue({ data: mockDetail });
+    mockedClient.get.mockResolvedValue({ data: mockProfile });
 
     const result = await fetchDiseaseDetail('epilepsy');
 
     expect(mockedClient.get).toHaveBeenCalledWith('/diseases/epilepsy');
-    expect(result).toEqual(mockDetail);
-  });
-
-  it('fetchDiseaseProducts calls /diseases/{slug}/products', async () => {
-    const mockProducts = [{ disease: { id: '1' }, score: 0.8, aligned_count: 5, counter_count: 1 }];
-    mockedClient.get.mockResolvedValue({ data: mockProducts });
-
-    const result = await fetchDiseaseProducts('epilepsy');
-
-    expect(mockedClient.get).toHaveBeenCalledWith('/diseases/epilepsy/products');
-    expect(result).toEqual(mockProducts);
+    expect(result).toEqual(mockProfile);
   });
 });

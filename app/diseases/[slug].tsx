@@ -1,11 +1,10 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { Box, Text, Heading, VStack, HStack, Divider, Pressable } from '@gluestack-ui/themed';
+import { Box, Text, Heading, VStack, HStack, Pressable } from '@gluestack-ui/themed';
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
-import { useDiseaseDetail, useDiseaseProducts } from '../../src/hooks/useDiseases';
+import { useDiseaseDetail } from '../../src/hooks/useDiseases';
 import { TargetBadge } from '../../src/components/TargetBadge';
 import { EffectChip } from '../../src/components/EffectChip';
-import { ScoreBar } from '../../src/components/ScoreBar';
 import { LoadingState } from '../../src/components/LoadingState';
 import { ErrorState } from '../../src/components/ErrorState';
 import { brand, colors } from '../../src/theme/colors';
@@ -14,7 +13,6 @@ export default function DiseaseDetailScreen() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
   const router = useRouter();
   const { data: disease, isLoading, isError, refetch } = useDiseaseDetail(slug);
-  const { data: products } = useDiseaseProducts(slug);
 
   if (isLoading) return <LoadingState />;
   if (isError || !disease) return <ErrorState message="Failed to load disease" onRetry={refetch} />;
@@ -29,11 +27,21 @@ export default function DiseaseDetailScreen() {
             <Heading size="xl" color="$textDark900">
               {disease.display_name}
             </Heading>
-            {disease.source_url && (
-              <Text fontSize="$xs" color={brand.sage} mt="$1">
+            {disease.tagline ? (
+              <Text fontSize="$sm" color={brand.darkGreen} mt="$1" fontWeight="$medium">
+                {disease.tagline}
+              </Text>
+            ) : null}
+            {disease.short_description ? (
+              <Text fontSize="$sm" color="$textDark600" mt="$2" lineHeight="$lg">
+                {disease.short_description}
+              </Text>
+            ) : null}
+            {disease.source_url ? (
+              <Text fontSize="$xs" color={brand.sage} mt="$2">
                 {disease.source_url}
               </Text>
-            )}
+            ) : null}
           </Box>
 
           {/* Targets */}
@@ -49,7 +57,8 @@ export default function DiseaseDetailScreen() {
                 Targets ({disease.targets.length})
               </Heading>
               {disease.targets
-                .sort((a, b) => b.frequency - a.frequency)
+                .slice()
+                .sort((a, b) => b.total_mentions - a.total_mentions)
                 .map((dt) => (
                   <HStack
                     key={dt.target.id}
@@ -61,14 +70,9 @@ export default function DiseaseDetailScreen() {
                   >
                     <HStack alignItems="center" gap="$2" flex={1}>
                       <TargetBadge name={dt.target.display_name} type={dt.target.type} />
-                      {dt.role && (
-                        <Text fontSize="$xs" color="$textLight500">
-                          {dt.role}
-                        </Text>
-                      )}
                     </HStack>
                     <Text fontSize="$xs" color="$textLight400">
-                      freq: {dt.frequency}
+                      {dt.paper_count} paper{dt.paper_count === 1 ? '' : 's'}
                     </Text>
                   </HStack>
                 ))}
@@ -88,7 +92,8 @@ export default function DiseaseDetailScreen() {
                 Cannabis Compounds ({disease.ligands.length})
               </Heading>
               {disease.ligands
-                .sort((a, b) => b.frequency - a.frequency)
+                .slice()
+                .sort((a, b) => b.total_mentions - a.total_mentions)
                 .map((dl) => (
                   <Pressable
                     key={dl.ligand.id}
@@ -102,14 +107,14 @@ export default function DiseaseDetailScreen() {
                         <Text fontWeight="$medium" color={brand.sage} fontSize="$sm">
                           {dl.ligand.display_name}
                         </Text>
-                        {dl.category && (
+                        {dl.ligand.chemical_family ? (
                           <Text fontSize="$2xs" color="$textLight500">
-                            {dl.category}
+                            {dl.ligand.chemical_family}
                           </Text>
-                        )}
+                        ) : null}
                       </VStack>
                       <Text fontSize="$xs" color="$textLight400">
-                        freq: {dl.frequency}
+                        {dl.paper_count} paper{dl.paper_count === 1 ? '' : 's'}
                       </Text>
                     </HStack>
                   </Pressable>
@@ -157,42 +162,8 @@ export default function DiseaseDetailScreen() {
             </Box>
           )}
 
-          {/* Products */}
-          {products && products.length > 0 && (
-            <Box
-              bg="$white"
-              p="$4"
-              borderRadius="$lg"
-              borderWidth={1}
-              borderColor="$borderLight200"
-            >
-              <Heading size="sm" color="$textDark700" mb="$3">
-                Recommended Products ({products.length})
-              </Heading>
-              {products
-                .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
-                .map((ps) => (
-                  <Box
-                    key={ps.product.id}
-                    py="$3"
-                    borderBottomWidth={1}
-                    borderBottomColor="$borderLight100"
-                  >
-                    <Text fontWeight="$medium" fontSize="$sm" color="$textDark800" mb="$1">
-                      {ps.product.display_name}
-                    </Text>
-                    <ScoreBar
-                      score={ps.score}
-                      aligned={ps.aligned_count}
-                      counter={ps.counter_count}
-                    />
-                  </Box>
-                ))}
-            </Box>
-          )}
-
           {/* Literature */}
-          {disease.literature_text && (
+          {disease.literature_text ? (
             <Box
               bg="$white"
               p="$4"
@@ -207,7 +178,7 @@ export default function DiseaseDetailScreen() {
                 {disease.literature_text}
               </Text>
             </Box>
-          )}
+          ) : null}
         </VStack>
       </ScrollView>
     </>
