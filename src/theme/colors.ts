@@ -11,6 +11,8 @@ export const colors = {
   grayWarm: '#4A4A4A',
   gold: '#E5C866',
   goldDeep: '#D2B354',
+  clay: '#B85450', // muted brick-red, used for anxiety topic card
+  amethyst: '#6B5B95', // deep purple, used for relaxation topic card
   white: '#FFFFFF',
   whiteMuted: 'rgba(255,255,255,0.7)',
   whiteSubtle: 'rgba(255,255,255,0.4)',
@@ -36,7 +38,7 @@ export const brand = {
 // All four pass AA contrast for white text (used when the card is selected).
 export const topics = {
   sleep: colors.forestLight, // deepest, calming
-  anxiety: colors.leaf, // mid green, central brand
+  anxiety: colors.clay, // muted red, alarm-toned without being clinical
   euphoria: colors.goldDeep, // warm gold, uplift
-  relaxation: colors.leafPale, // soft green, gentle
+  relaxation: colors.amethyst, // deep purple, traditional calm/lavender association
 } as const;
