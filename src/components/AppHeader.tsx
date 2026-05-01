@@ -53,7 +53,7 @@ export function AppHeader({ title, showBack = false }: AppHeaderProps) {
             color: colors.white,
             fontSize: 18,
             fontWeight: '700',
-            paddingLeft: 12,
+            paddingLeft: 24,
             paddingTop: 14,
             flexShrink: 1,
           }}
