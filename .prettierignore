@@ -1,0 +1,11 @@
+node_modules
+.expo
+.claude
+dist
+build
+coverage
+android
+ios
+pnpm-lock.yaml
+package-lock.json
+*.log

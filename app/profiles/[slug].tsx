@@ -15,7 +15,7 @@ import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { useLigandProfile, useLigandDiseases } from '../../src/hooks/useLigands';
 import { LoadingState } from '../../src/components/LoadingState';
 import { ErrorState } from '../../src/components/ErrorState';
-import { brand } from '../../src/theme/colors';
+import { brand, colors } from '../../src/theme/colors';
 
 export default function ProfileDetailScreen() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
@@ -31,11 +31,17 @@ export default function ProfileDetailScreen() {
   return (
     <>
       <Stack.Screen options={{ title: slug }} />
-      <ScrollView style={{ flex: 1, backgroundColor: '#F5F7F5' }}>
+      <ScrollView style={{ flex: 1, backgroundColor: colors.cream }}>
         <VStack p="$4" gap="$4">
           {/* Dashboard Card */}
           {dc ? (
-            <Box bg={`${brand.sage}15`} p="$4" borderRadius="$lg" borderWidth={1} borderColor={`${brand.sage}40`}>
+            <Box
+              bg={`${brand.sage}15`}
+              p="$4"
+              borderRadius="$lg"
+              borderWidth={1}
+              borderColor={`${brand.sage}40`}
+            >
               {dc.headline ? (
                 <Heading size="md" color={brand.darkGreen} mb="$1">
                   {dc.headline}
@@ -90,7 +96,13 @@ export default function ProfileDetailScreen() {
 
           {/* Mechanistic Highlights */}
           {dc?.mechanistic_highlights && dc.mechanistic_highlights.length > 0 ? (
-            <Box bg="$white" p="$4" borderRadius="$lg" borderWidth={1} borderColor="$borderLight200">
+            <Box
+              bg="$white"
+              p="$4"
+              borderRadius="$lg"
+              borderWidth={1}
+              borderColor="$borderLight200"
+            >
               <Heading size="sm" color="$textDark700" mb="$3">
                 Mechanistic Highlights
               </Heading>
@@ -137,7 +149,13 @@ export default function ProfileDetailScreen() {
 
           {/* Linked Diseases */}
           {linkedDiseases && linkedDiseases.length > 0 ? (
-            <Box bg="$white" p="$4" borderRadius="$lg" borderWidth={1} borderColor="$borderLight200">
+            <Box
+              bg="$white"
+              p="$4"
+              borderRadius="$lg"
+              borderWidth={1}
+              borderColor="$borderLight200"
+            >
               <Heading size="sm" color="$textDark700" mb="$3">
                 Linked Diseases ({linkedDiseases.length})
               </Heading>

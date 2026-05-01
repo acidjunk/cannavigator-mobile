@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Image } from 'react-native';
 import {
   Box,
   Text,
@@ -79,12 +80,21 @@ export default function SettingsScreen() {
           </Text>
         )}
 
-        <Box mt="$8" p="$4" bg="$white" borderRadius="$lg" borderWidth={1} borderColor="$borderLight200">
-          <Text fontWeight="$semibold" color="$textDark700" mb="$1">
-            Autoleaf Cannavigator Mobile
-          </Text>
+        <Box
+          mt="$8"
+          p="$4"
+          bg="$white"
+          borderRadius="$lg"
+          borderWidth={1}
+          borderColor="$borderLight200"
+        >
+          <Image
+            source={require('../../assets/logo-landscape.png')}
+            style={{ width: 160, height: 34, marginBottom: 6 }}
+            resizeMode="contain"
+          />
           <Text fontSize="$xs" color="$textLight500">
-            Version 1.0.0
+            Cannavigator Mobile · Version 1.0.0
           </Text>
         </Box>
       </VStack>

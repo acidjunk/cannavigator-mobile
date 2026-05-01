@@ -6,6 +6,7 @@ import { LoadingState } from '../../src/components/LoadingState';
 import { ErrorState } from '../../src/components/ErrorState';
 import { useInteractionMatrix } from '../../src/hooks/useInteractions';
 import { InteractionMatrixCell } from '../../src/types/interaction';
+import { colors } from '../../src/theme/colors';
 
 const CELL_WIDTH = 56;
 const CELL_HEIGHT = 44;
@@ -25,7 +26,8 @@ function effectAbbrev(effect: string): string {
 
 function effectColor(effect: string): string {
   const e = effect.toLowerCase();
-  if (e.includes('agonist') && !e.includes('antagonist') && !e.includes('partial')) return '#22c55e';
+  if (e.includes('agonist') && !e.includes('antagonist') && !e.includes('partial'))
+    return '#22c55e';
   if (e.includes('partial')) return '#86efac';
   if (e.includes('antagonist') || e === 'nam') return '#ef4444';
   if (e === 'pam') return '#3b82f6';
@@ -65,8 +67,7 @@ export default function MatrixScreen() {
     const q = query.toLowerCase();
     return matrix.filter(
       (r) =>
-        r.target_display_name.toLowerCase().includes(q) ||
-        r.target_slug.toLowerCase().includes(q),
+        r.target_display_name.toLowerCase().includes(q) || r.target_slug.toLowerCase().includes(q),
     );
   }, [matrix, query]);
 
@@ -112,7 +113,12 @@ export default function MatrixScreen() {
           </HStack>
         ))}
         <HStack alignItems="center" gap="$1">
-          <View style={[styles.legendDot, { backgroundColor: '#22c55e', borderWidth: 1.5, borderColor: '#166534' }]} />
+          <View
+            style={[
+              styles.legendDot,
+              { backgroundColor: '#22c55e', borderWidth: 1.5, borderColor: '#166534' },
+            ]}
+          />
           <Text fontSize="$2xs" color="$textLight500">
             = has potency
           </Text>
@@ -128,10 +134,7 @@ export default function MatrixScreen() {
               <View style={styles.cornerCell} />
               {ligandSlugs.map((slug) => (
                 <View key={slug} style={styles.colHeader}>
-                  <Text
-                    style={styles.colHeaderText}
-                    numberOfLines={1}
-                  >
+                  <Text style={styles.colHeaderText} numberOfLines={1}>
                     {slug.replace(/_/g, ' ')}
                   </Text>
                 </View>
@@ -168,7 +171,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
-    backgroundColor: '#F5F7F5',
+    backgroundColor: colors.cream,
   },
   cornerCell: {
     width: ROW_HEADER_WIDTH,
@@ -202,7 +205,7 @@ const styles = StyleSheet.create({
     height: CELL_HEIGHT,
     justifyContent: 'center',
     paddingHorizontal: 4,
-    backgroundColor: '#F5F7F5',
+    backgroundColor: colors.cream,
     borderRightWidth: 1,
     borderRightColor: '#e5e7eb',
   },

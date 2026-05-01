@@ -1,6 +1,16 @@
 import React, { useState, useMemo } from 'react';
-import { FlatList, Image } from 'react-native';
-import { Box, Text, Heading, Divider, Pressable, HStack, VStack, Badge, BadgeText } from '@gluestack-ui/themed';
+import { FlatList } from 'react-native';
+import {
+  Box,
+  Text,
+  Heading,
+  Divider,
+  Pressable,
+  HStack,
+  VStack,
+  Badge,
+  BadgeText,
+} from '@gluestack-ui/themed';
 import { useRouter } from 'expo-router';
 import { SearchBar } from '../../src/components/SearchBar';
 import { DiseaseCard } from '../../src/components/DiseaseCard';
@@ -8,7 +18,7 @@ import { LigandCard } from '../../src/components/LigandCard';
 import { LoadingState } from '../../src/components/LoadingState';
 import { useDiseases, useDiseaseDetail } from '../../src/hooks/useDiseases';
 import { useLigandProfileCards } from '../../src/hooks/useLigands';
-import { brand, topics } from '../../src/theme/colors';
+import { topics } from '../../src/theme/colors';
 
 interface QuickTopic {
   label: string;
@@ -26,7 +36,8 @@ const QUICK_TOPICS: QuickTopic[] = [
     color: topics.sleep,
     diseaseSlugs: ['insomnia'],
     description: 'Trouble falling or staying asleep',
-    advice: 'CBD and THC interact with CB1 and TRPV1 receptors involved in sleep regulation. CBD may reduce anxiety-related insomnia, while low-dose THC can shorten sleep onset. Myrcene and Linalool are terpenes with sedative properties.',
+    advice:
+      'CBD and THC interact with CB1 and TRPV1 receptors involved in sleep regulation. CBD may reduce anxiety-related insomnia, while low-dose THC can shorten sleep onset. Myrcene and Linalool are terpenes with sedative properties.',
   },
   {
     label: 'Anxiety',
@@ -34,7 +45,8 @@ const QUICK_TOPICS: QuickTopic[] = [
     color: topics.anxiety,
     diseaseSlugs: ['anxiety', 'ptsd'],
     description: 'Stress, worry, and anxious feelings',
-    advice: 'CBD is the most studied cannabinoid for anxiety, acting on 5-HT1a serotonin receptors. CBDA shows emerging anxiolytic potential. Linalool (lavender terpene) and Limonene may provide synergistic calming effects. THC at low doses can help but may worsen anxiety at higher doses.',
+    advice:
+      'CBD is the most studied cannabinoid for anxiety, acting on 5-HT1a serotonin receptors. CBDA shows emerging anxiolytic potential. Linalool (lavender terpene) and Limonene may provide synergistic calming effects. THC at low doses can help but may worsen anxiety at higher doses.',
   },
   {
     label: 'Euphoria',
@@ -42,7 +54,8 @@ const QUICK_TOPICS: QuickTopic[] = [
     color: topics.euphoria,
     diseaseSlugs: ['depression'],
     description: 'Mood lift and positive feelings',
-    advice: 'THC activates CB1 receptors in the reward pathway, producing euphoric effects. CBG and CBC show antidepressant potential via 5-HT1a receptor modulation. Limonene (citrus terpene) is associated with mood elevation. Beta-Caryophyllene activates CB2 receptors and may reduce stress.',
+    advice:
+      'THC activates CB1 receptors in the reward pathway, producing euphoric effects. CBG and CBC show antidepressant potential via 5-HT1a receptor modulation. Limonene (citrus terpene) is associated with mood elevation. Beta-Caryophyllene activates CB2 receptors and may reduce stress.',
   },
   {
     label: 'Relaxation',
@@ -50,7 +63,8 @@ const QUICK_TOPICS: QuickTopic[] = [
     color: topics.relaxation,
     diseaseSlugs: ['pain', 'inflammation', 'fibromyalgia'],
     description: 'Physical and mental relaxation',
-    advice: 'THC and CBD work on CB1/CB2 receptors to relieve tension and pain. Myrcene is the most common cannabis terpene with muscle-relaxant and sedative properties. Beta-Caryophyllene provides anti-inflammatory effects via CB2 activation. Linalool adds anxiolytic support.',
+    advice:
+      'THC and CBD work on CB1/CB2 receptors to relieve tension and pain. Myrcene is the most common cannabis terpene with muscle-relaxant and sedative properties. Beta-Caryophyllene provides anti-inflammatory effects via CB2 activation. Linalool adds anxiolytic support.',
   },
 ];
 
@@ -74,8 +88,20 @@ function QuickTopicCard({
       sx={{
         ':active': { opacity: 0.85 },
         ...(isSelected
-          ? { shadowColor: topic.color, shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8, elevation: 6 }
-          : { shadowColor: '$black', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.05, shadowRadius: 3, elevation: 1 }),
+          ? {
+              shadowColor: topic.color,
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.3,
+              shadowRadius: 8,
+              elevation: 6,
+            }
+          : {
+              shadowColor: '$black',
+              shadowOffset: { width: 0, height: 1 },
+              shadowOpacity: 0.05,
+              shadowRadius: 3,
+              elevation: 1,
+            }),
       }}
       flex={1}
       minWidth="$40"
@@ -114,7 +140,13 @@ function TopicDetailView({ topic }: { topic: QuickTopic }) {
 
   return (
     <Box px="$4" pb="$6">
-      <Box borderRadius="$lg" overflow="hidden" borderWidth={1} borderColor="$borderLight200" mb="$3">
+      <Box
+        borderRadius="$lg"
+        overflow="hidden"
+        borderWidth={1}
+        borderColor="$borderLight200"
+        mb="$3"
+      >
         <Box bg={topic.color} px="$4" py="$3">
           <HStack alignItems="center" gap="$2">
             <Text fontSize="$xl">{topic.icon}</Text>
@@ -135,7 +167,14 @@ function TopicDetailView({ topic }: { topic: QuickTopic }) {
 
       {/* Key compounds */}
       {diseaseDetail && diseaseDetail.ligands.length > 0 ? (
-        <Box bg="$white" p="$4" borderRadius="$lg" borderWidth={1} borderColor="$borderLight200" mb="$3">
+        <Box
+          bg="$white"
+          p="$4"
+          borderRadius="$lg"
+          borderWidth={1}
+          borderColor="$borderLight200"
+          mb="$3"
+        >
           <Heading size="sm" color="$textDark700" mb="$2">
             Key Compounds
           </Heading>
@@ -156,7 +195,9 @@ function TopicDetailView({ topic }: { topic: QuickTopic }) {
                       {dl.ligand.display_name}
                     </Text>
                     {dl.category ? (
-                      <Text fontSize="$2xs" color="$textLight500">{dl.category}</Text>
+                      <Text fontSize="$2xs" color="$textLight500">
+                        {dl.category}
+                      </Text>
                     ) : null}
                   </VStack>
                   <Badge size="sm" action="info" borderRadius="$full">
@@ -215,7 +256,7 @@ export default function HomeScreen() {
 
   const isLoading = diseasesLoading || profilesLoading;
   const hasQuery = query.length > 0;
-  const displayDiseases = hasQuery ? diseases?.slice(0, 10) ?? [] : diseases?.slice(0, 5) ?? [];
+  const displayDiseases = hasQuery ? (diseases?.slice(0, 10) ?? []) : (diseases?.slice(0, 5) ?? []);
 
   const handleTopicPress = (topic: QuickTopic) => {
     if (selectedTopic?.label === topic.label) {
@@ -229,21 +270,6 @@ export default function HomeScreen() {
   return (
     <Box flex={1} bg="$backgroundLight50">
       <Box p="$4" pb="$2">
-        <HStack alignItems="center" gap="$3" mb="$1">
-          <Image
-            source={require('../../assets/logo.png')}
-            style={{ width: 44, height: 44, borderRadius: 8 }}
-            resizeMode="contain"
-          />
-          <VStack>
-            <Heading size="lg" color={brand.textDark}>
-              Autoleaf
-            </Heading>
-            <Text color={brand.textMuted} fontSize="$xs">
-              Cannabis pharmacology navigator
-            </Text>
-          </VStack>
-        </HStack>
         <SearchBar
           value={query}
           onChangeText={(t) => {
@@ -281,9 +307,7 @@ export default function HomeScreen() {
               ) : null}
 
               {/* Selected topic detail */}
-              {selectedTopic && !hasQuery ? (
-                <TopicDetailView topic={selectedTopic} />
-              ) : null}
+              {selectedTopic && !hasQuery ? <TopicDetailView topic={selectedTopic} /> : null}
 
               {/* Search results or default lists */}
               {!selectedTopic || hasQuery ? (
@@ -315,13 +339,15 @@ export default function HomeScreen() {
                       No profiles found
                     </Text>
                   ) : (
-                    filteredProfiles.slice(0, 10).map((c) => (
-                      <LigandCard
-                        key={c.ligand_slug}
-                        card={c}
-                        onPress={() => router.push(`/profiles/${c.ligand_slug}`)}
-                      />
-                    ))
+                    filteredProfiles
+                      .slice(0, 10)
+                      .map((c) => (
+                        <LigandCard
+                          key={c.ligand_slug}
+                          card={c}
+                          onPress={() => router.push(`/profiles/${c.ligand_slug}`)}
+                        />
+                      ))
                   )}
                 </Box>
               ) : null}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, HStack, Text } from '@gluestack-ui/themed';
+import { colors } from '../theme/colors';
 
 interface ScoreBarProps {
   score: number | null;
@@ -8,8 +9,10 @@ interface ScoreBarProps {
 }
 
 function scoreColor(score: number): string {
-  if (score >= 0.7) return '$success500';
-  if (score >= 0.4) return '$warning500';
+  // High-fit results draw the eye in brand gold; mid stays leaf-green; low stays warning/error.
+  if (score >= 0.8) return colors.gold;
+  if (score >= 0.5) return '$success500';
+  if (score >= 0.3) return '$warning500';
   return '$error500';
 }
 
