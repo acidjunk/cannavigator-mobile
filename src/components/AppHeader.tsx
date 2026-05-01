@@ -58,6 +58,7 @@ export function AppHeader({ title, showBack = false }: AppHeaderProps) {
             // row uses alignItems: 'flex-start' to keep the logo glued to the
             // top, so we opt the title back into center alignment here.
             alignSelf: 'center',
+            marginTop: 6,
             flexShrink: 1,
           }}
         >
