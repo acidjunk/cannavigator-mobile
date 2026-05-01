@@ -16,11 +16,16 @@ export default function TabLayout() {
         headerTitleStyle: { fontWeight: 'bold' },
         headerLeft: () => <HeaderLogo />,
         // Pin the headerLeft slot to the top-left of the header so the logo
-        // hugs the top edge instead of being vertical-centered. Horizontal
-        // alignment with content (16px) is handled inside HeaderLogo itself.
+        // hugs the top edge instead of being vertical-centered. The
+        // horizontal padding lives on HeaderLogo's Pressable (16px to match
+        // the page-content edge), so we zero out the container's default
+        // horizontal padding here to avoid stacking offsets.
         headerLeftContainerStyle: {
           paddingTop: 0,
           paddingBottom: 0,
+          paddingLeft: 0,
+          paddingRight: 0,
+          paddingHorizontal: 0,
           alignItems: 'flex-start',
           justifyContent: 'flex-start',
         },
