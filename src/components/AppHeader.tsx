@@ -24,7 +24,11 @@ export function AppHeader({ title, showBack = false }: AppHeaderProps) {
       style={{
         backgroundColor: colors.forest,
         paddingTop: insets.top,
-        paddingHorizontal: 16,
+        // insets.left/right cover the iPhone landscape notch and dynamic
+        // island so the logo and title don't slide under them. In portrait
+        // these are 0 and only the 16px gutter applies.
+        paddingLeft: 16 + insets.left,
+        paddingRight: 16 + insets.right,
         paddingBottom: 8,
         flexDirection: 'row',
         alignItems: 'flex-start',
@@ -43,19 +47,19 @@ export function AppHeader({ title, showBack = false }: AppHeaderProps) {
       ) : null}
       <HeaderLogo />
       {title ? (
-        <View
+        <Text
+          numberOfLines={1}
           style={{
-            flex: 1,
+            color: colors.white,
+            fontSize: 18,
+            fontWeight: '700',
             paddingLeft: 12,
-            paddingTop: 10,
-            justifyContent: 'flex-end',
-            flexDirection: 'row',
+            paddingTop: 14,
+            flexShrink: 1,
           }}
         >
-          <Text numberOfLines={1} style={{ color: colors.white, fontSize: 18, fontWeight: '700' }}>
-            {title}
-          </Text>
-        </View>
+          {title}
+        </Text>
       ) : null}
     </View>
   );
