@@ -27,8 +27,8 @@ Backend runs at `http://localhost:8000` with API docs at `http://localhost:8000/
 
 ```bash
 cd cannavigator-mobile
-npm install --legacy-peer-deps
-npx expo start
+pnpm install
+pnpm exec expo start
 ```
 
 - Press **w** to open in web browser
@@ -46,7 +46,7 @@ http://192.168.x.x:8000/api/v1
 ### 4. Run tests
 
 ```bash
-npm test
+pnpm test
 ```
 
 ---
