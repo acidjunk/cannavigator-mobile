@@ -15,7 +15,7 @@ import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { useLigandProfile, useLigandDiseases } from '../../src/hooks/useLigands';
 import { LoadingState } from '../../src/components/LoadingState';
 import { ErrorState } from '../../src/components/ErrorState';
-import { brand } from '../../src/theme/colors';
+import { brand, colors } from '../../src/theme/colors';
 
 export default function ProfileDetailScreen() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
@@ -31,7 +31,7 @@ export default function ProfileDetailScreen() {
   return (
     <>
       <Stack.Screen options={{ title: slug }} />
-      <ScrollView style={{ flex: 1, backgroundColor: '#F5F7F5' }}>
+      <ScrollView style={{ flex: 1, backgroundColor: colors.cream }}>
         <VStack p="$4" gap="$4">
           {/* Dashboard Card */}
           {dc ? (

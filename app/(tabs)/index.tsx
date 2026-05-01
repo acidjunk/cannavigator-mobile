@@ -270,21 +270,16 @@ export default function HomeScreen() {
   return (
     <Box flex={1} bg="$backgroundLight50">
       <Box p="$4" pb="$2">
-        <HStack alignItems="center" gap="$3" mb="$1">
+        <VStack mb="$2" alignItems="flex-start">
           <Image
-            source={require('../../assets/logo.png')}
-            style={{ width: 44, height: 44, borderRadius: 8 }}
+            source={require('../../assets/logo-landscape.png')}
+            style={{ width: 220, height: 47, marginBottom: 4 }}
             resizeMode="contain"
           />
-          <VStack>
-            <Heading size="lg" color={brand.textDark}>
-              Autoleaf
-            </Heading>
-            <Text color={brand.textMuted} fontSize="$xs">
-              Cannabis pharmacology navigator
-            </Text>
-          </VStack>
-        </HStack>
+          <Text color={brand.textMuted} fontSize="$xs">
+            Cannabis pharmacology navigator
+          </Text>
+        </VStack>
         <SearchBar
           value={query}
           onChangeText={(t) => {
