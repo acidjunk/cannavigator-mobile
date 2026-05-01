@@ -31,9 +31,12 @@ export const brand = {
   whiteSubtle: colors.whiteSubtle,
 } as const;
 
+// Quick-lookup topic colours — brand-aligned shades pulled from the AutoLeaf
+// palette so each card stays distinct while reading as part of the same family.
+// All four pass AA contrast for white text (used when the card is selected).
 export const topics = {
-  sleep: '#4F6D7A',
-  anxiety: '#5B8A72',
-  euphoria: '#C49B3C',
-  relaxation: '#6B8F71',
+  sleep: colors.forestLight, // deepest, calming
+  anxiety: colors.leaf, // mid green, central brand
+  euphoria: colors.goldDeep, // warm gold, uplift
+  relaxation: colors.leafPale, // soft green, gentle
 } as const;
