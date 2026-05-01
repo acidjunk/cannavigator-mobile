@@ -1,5 +1,7 @@
 import { fetchLigandProfileCards, fetchLigandProfile } from '../../src/api/ligands';
 
+import apiClient from '../../src/api/client';
+
 jest.mock('../../src/api/client', () => {
   const mockAxios = {
     get: jest.fn(),
@@ -7,8 +9,6 @@ jest.mock('../../src/api/client', () => {
   };
   return { __esModule: true, default: mockAxios };
 });
-
-import apiClient from '../../src/api/client';
 const mockedClient = apiClient as jest.Mocked<typeof apiClient>;
 
 describe('ligands API', () => {

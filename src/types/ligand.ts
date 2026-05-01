@@ -10,7 +10,7 @@ export interface Ligand {
 export interface DashboardCard {
   headline: string;
   tagline: string;
-  top_targets: Array<{ target: string; potency: string; comment: string }>;
+  top_targets: { target: string; potency: string; comment: string }[];
   mechanistic_highlights: string[];
   disease_relevance: string[];
   summary?: string;

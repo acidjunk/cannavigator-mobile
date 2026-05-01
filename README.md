@@ -106,13 +106,13 @@ The platform currently tracks 77 targets across these categories.
 
 Interactions capture how a specific ligand affects a specific target (472 interactions in the database):
 
-| Field | Description |
-|---|---|
-| **Effect** | Direction of action: agonist, antagonist, partial agonist, PAM, NAM |
-| **Potency** | Binding affinity in nanomolars (nM). Lower = stronger binding |
-| **Potency Type** | Measurement method: Ki, EC50, IC50, or qualitative |
-| **Reference** | Academic citation supporting the interaction |
-| **Conflict** | Flag for contradictory findings across studies |
+| Field            | Description                                                         |
+| ---------------- | ------------------------------------------------------------------- |
+| **Effect**       | Direction of action: agonist, antagonist, partial agonist, PAM, NAM |
+| **Potency**      | Binding affinity in nanomolars (nM). Lower = stronger binding       |
+| **Potency Type** | Measurement method: Ki, EC50, IC50, or qualitative                  |
+| **Reference**    | Academic citation supporting the interaction                        |
+| **Conflict**     | Flag for contradictory findings across studies                      |
 
 The full interaction matrix (69 ligands x 77 targets) forms the computational backbone for all therapeutic scoring.
 
@@ -129,9 +129,9 @@ Diseases represent clinical conditions for which cannabis-based treatment is bei
 
 Desired effects bridge diseases to targets by specifying what action is therapeutically beneficial. For example:
 
-- *Epilepsy + CB1 → agonist* (activating CB1 reduces seizure activity)
-- *Inflammation + CB2 → agonist* (activating CB2 provides anti-inflammatory effects)
-- *Anxiety + FAAH → inhibitor* (blocking FAAH increases anandamide, reducing anxiety)
+- _Epilepsy + CB1 → agonist_ (activating CB1 reduces seizure activity)
+- _Inflammation + CB2 → agonist_ (activating CB2 provides anti-inflammatory effects)
+- _Anxiety + FAAH → inhibitor_ (blocking FAAH increases anandamide, reducing anxiety)
 
 Each desired effect carries a **confidence score** (0–1) and may include an **override flag** where expert review has corrected algorithm-derived predictions.
 
@@ -154,16 +154,17 @@ Product Chemistry (ligand concentrations)
 
 Ligand profiles compile evidence from peer-reviewed literature stratified by evidence level:
 
-| Level | Weight | Example |
-|---|---|---|
-| Human RCT | 1.0 | Randomized controlled trial |
-| Observational | 0.8 | Cohort or case-control study |
-| Case Reports | 0.6 | Individual patient reports |
-| Animal (in vivo) | 0.45 | Mouse/rat/dog studies |
-| In Vitro | 0.25 | Cell culture / receptor binding |
-| In Silico | 0.1 | Computational predictions |
+| Level            | Weight | Example                         |
+| ---------------- | ------ | ------------------------------- |
+| Human RCT        | 1.0    | Randomized controlled trial     |
+| Observational    | 0.8    | Cohort or case-control study    |
+| Case Reports     | 0.6    | Individual patient reports      |
+| Animal (in vivo) | 0.45   | Mouse/rat/dog studies           |
+| In Vitro         | 0.25   | Cell culture / receptor binding |
+| In Silico        | 0.1    | Computational predictions       |
 
 Three scoring metrics summarize evidence quality per ligand:
+
 - **NES** (Numeric Evidence Strength): Aggregates binding potency values
 - **QES** (Qualitative Evidence Strength): Aggregates evidence-level weights
 - **CES** (Combined Evidence Score): Weighted composite (70% QES + 30% NES)
@@ -174,14 +175,14 @@ Three scoring metrics summarize evidence quality per ligand:
 
 All read-only, against the FastAPI backend at `/api/v1`:
 
-| Endpoint | Used By |
-|---|---|
-| `GET /diseases?q=&limit=` | Disease list, home search |
-| `GET /diseases/{slug}` | Disease detail screen |
-| `GET /diseases/{slug}/products` | Disease detail products section |
-| `GET /ligands/profiles/cards` | Profiles tab, home search |
-| `GET /ligands/{slug}/profile` | Profile detail screen |
-| `GET /reverse/ligand-diseases/{slug}` | Profile detail linked diseases |
+| Endpoint                              | Used By                         |
+| ------------------------------------- | ------------------------------- |
+| `GET /diseases?q=&limit=`             | Disease list, home search       |
+| `GET /diseases/{slug}`                | Disease detail screen           |
+| `GET /diseases/{slug}/products`       | Disease detail products section |
+| `GET /ligands/profiles/cards`         | Profiles tab, home search       |
+| `GET /ligands/{slug}/profile`         | Profile detail screen           |
+| `GET /reverse/ligand-diseases/{slug}` | Profile detail linked diseases  |
 
 ## License
 

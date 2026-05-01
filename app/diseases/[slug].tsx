@@ -1,14 +1,6 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
-import {
-  Box,
-  Text,
-  Heading,
-  VStack,
-  HStack,
-  Divider,
-  Pressable,
-} from '@gluestack-ui/themed';
+import { Box, Text, Heading, VStack, HStack, Divider, Pressable } from '@gluestack-ui/themed';
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { useDiseaseDetail, useDiseaseProducts } from '../../src/hooks/useDiseases';
 import { TargetBadge } from '../../src/components/TargetBadge';
@@ -46,7 +38,13 @@ export default function DiseaseDetailScreen() {
 
           {/* Targets */}
           {disease.targets.length > 0 && (
-            <Box bg="$white" p="$4" borderRadius="$lg" borderWidth={1} borderColor="$borderLight200">
+            <Box
+              bg="$white"
+              p="$4"
+              borderRadius="$lg"
+              borderWidth={1}
+              borderColor="$borderLight200"
+            >
               <Heading size="sm" color="$textDark700" mb="$3">
                 Targets ({disease.targets.length})
               </Heading>
@@ -79,7 +77,13 @@ export default function DiseaseDetailScreen() {
 
           {/* Ligands */}
           {disease.ligands.length > 0 && (
-            <Box bg="$white" p="$4" borderRadius="$lg" borderWidth={1} borderColor="$borderLight200">
+            <Box
+              bg="$white"
+              p="$4"
+              borderRadius="$lg"
+              borderWidth={1}
+              borderColor="$borderLight200"
+            >
               <Heading size="sm" color="$textDark700" mb="$3">
                 Cannabis Compounds ({disease.ligands.length})
               </Heading>
@@ -115,7 +119,13 @@ export default function DiseaseDetailScreen() {
 
           {/* Desired Effects */}
           {disease.desired_effects.length > 0 && (
-            <Box bg="$white" p="$4" borderRadius="$lg" borderWidth={1} borderColor="$borderLight200">
+            <Box
+              bg="$white"
+              p="$4"
+              borderRadius="$lg"
+              borderWidth={1}
+              borderColor="$borderLight200"
+            >
               <Heading size="sm" color="$textDark700" mb="$3">
                 Desired Effects ({disease.desired_effects.length})
               </Heading>
@@ -149,7 +159,13 @@ export default function DiseaseDetailScreen() {
 
           {/* Products */}
           {products && products.length > 0 && (
-            <Box bg="$white" p="$4" borderRadius="$lg" borderWidth={1} borderColor="$borderLight200">
+            <Box
+              bg="$white"
+              p="$4"
+              borderRadius="$lg"
+              borderWidth={1}
+              borderColor="$borderLight200"
+            >
               <Heading size="sm" color="$textDark700" mb="$3">
                 Recommended Products ({products.length})
               </Heading>
@@ -165,7 +181,11 @@ export default function DiseaseDetailScreen() {
                     <Text fontWeight="$medium" fontSize="$sm" color="$textDark800" mb="$1">
                       {ps.product.display_name}
                     </Text>
-                    <ScoreBar score={ps.score} aligned={ps.aligned_count} counter={ps.counter_count} />
+                    <ScoreBar
+                      score={ps.score}
+                      aligned={ps.aligned_count}
+                      counter={ps.counter_count}
+                    />
                   </Box>
                 ))}
             </Box>
@@ -173,7 +193,13 @@ export default function DiseaseDetailScreen() {
 
           {/* Literature */}
           {disease.literature_text && (
-            <Box bg="$white" p="$4" borderRadius="$lg" borderWidth={1} borderColor="$borderLight200">
+            <Box
+              bg="$white"
+              p="$4"
+              borderRadius="$lg"
+              borderWidth={1}
+              borderColor="$borderLight200"
+            >
               <Heading size="sm" color="$textDark700" mb="$3">
                 Literature
               </Heading>
