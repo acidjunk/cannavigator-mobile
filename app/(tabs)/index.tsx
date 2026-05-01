@@ -34,7 +34,7 @@ const QUICK_TOPICS: QuickTopic[] = [
     label: 'Sleep',
     icon: '\u{1F31C}',
     color: topics.sleep,
-    diseaseSlugs: ['insomnia'],
+    diseaseSlugs: ['insomnia_sleep'],
     description: 'Trouble falling or staying asleep',
     advice:
       'CBD and THC interact with CB1 and TRPV1 receptors involved in sleep regulation. CBD may reduce anxiety-related insomnia, while low-dose THC can shorten sleep onset. Myrcene and Linalool are terpenes with sedative properties.',
@@ -43,7 +43,7 @@ const QUICK_TOPICS: QuickTopic[] = [
     label: 'Anxiety',
     icon: '\u{1F9D8}',
     color: topics.anxiety,
-    diseaseSlugs: ['anxiety', 'ptsd'],
+    diseaseSlugs: ['anxiety', 'ptsd_stress'],
     description: 'Stress, worry, and anxious feelings',
     advice:
       'CBD is the most studied cannabinoid for anxiety, acting on 5-HT1a serotonin receptors. CBDA shows emerging anxiolytic potential. Linalool (lavender terpene) and Limonene may provide synergistic calming effects. THC at low doses can help but may worsen anxiety at higher doses.',
@@ -61,7 +61,7 @@ const QUICK_TOPICS: QuickTopic[] = [
     label: 'Relaxation',
     icon: '\u{1F343}',
     color: topics.relaxation,
-    diseaseSlugs: ['pain', 'inflammation', 'fibromyalgia'],
+    diseaseSlugs: ['pain_general', 'inflammation', 'fibromyalgia'],
     description: 'Physical and mental relaxation',
     advice:
       'THC and CBD work on CB1/CB2 receptors to relieve tension and pain. Myrcene is the most common cannabis terpene with muscle-relaxant and sedative properties. Beta-Caryophyllene provides anti-inflammatory effects via CB2 activation. Linalool adds anxiolytic support.',
