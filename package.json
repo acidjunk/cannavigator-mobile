@@ -24,7 +24,7 @@
     "expo-system-ui": "55.0.12-canary-20260327-0789fbc",
     "lucide-react-native": "^1.7.0",
     "react": "19.2.0",
-    "react-dom": "^19.2.0",
+    "react-dom": "19.2.0",
     "react-native": "0.83.4",
     "react-native-safe-area-context": "~5.6.2",
     "react-native-screens": "~4.23.0",
@@ -32,7 +32,6 @@
     "react-native-web": "^0.21.2"
   },
   "devDependencies": {
-    "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^13.3.3",
     "@types/jest": "^30.0.0",
     "@types/react": "~19.2.2",
@@ -40,5 +39,15 @@
     "jest-expo": "^55.0.12-canary-20260327-0789fbc",
     "typescript": "~5.9.2"
   },
-  "private": true
+  "private": true,
+  "packageManager": "pnpm@10.33.2",
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "@react-aria/checkbox>react": "19",
+        "@react-native-aria/checkbox>react": "19",
+        "jest-watch-typeahead>jest": "30"
+      }
+    }
+  }
 }

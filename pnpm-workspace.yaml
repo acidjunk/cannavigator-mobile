@@ -1,0 +1,9 @@
+# Supply-chain hardening: refuse any package version published less than
+# 10080 minutes (7 days) ago. Gives Socket / Snyk / npm trust-and-safety
+# time to detect and pull malicious releases before we install them.
+minimumReleaseAge: 10080
+
+# Add packages here to exempt them from the 7-day delay (e.g. when
+# `pnpm audit --fix` needs to install a same-day security patch).
+# `pnpm audit --fix` will auto-append advisory-fix versions here.
+minimumReleaseAgeExclude: []
