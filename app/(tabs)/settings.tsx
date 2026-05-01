@@ -90,7 +90,7 @@ export default function SettingsScreen() {
           borderColor={colors.forestLight}
         >
           <Image
-            source={require('../../assets/logo-white.png')}
+            source={require('../../assets/logo-landscape.png')}
             style={{ width: 160, height: 34, marginBottom: 6 }}
             resizeMode="contain"
           />
