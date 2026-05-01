@@ -13,6 +13,7 @@ import {
 } from '@gluestack-ui/themed';
 import { useQueryClient } from '@tanstack/react-query';
 import { getApiBaseUrl, setApiBaseUrl, getDefaultBaseUrl } from '../../src/config/env';
+import { colors } from '../../src/theme/colors';
 
 export default function SettingsScreen() {
   const [url, setUrl] = useState('');
@@ -83,17 +84,17 @@ export default function SettingsScreen() {
         <Box
           mt="$8"
           p="$4"
-          bg="$white"
+          bg={colors.forest}
           borderRadius="$lg"
           borderWidth={1}
-          borderColor="$borderLight200"
+          borderColor={colors.forestLight}
         >
           <Image
-            source={require('../../assets/logo-landscape.png')}
+            source={require('../../assets/logo-white.png')}
             style={{ width: 160, height: 34, marginBottom: 6 }}
             resizeMode="contain"
           />
-          <Text fontSize="$xs" color="$textLight500">
+          <Text fontSize="$xs" color={colors.whiteMuted}>
             Cannavigator Mobile · Version 1.0.0
           </Text>
         </Box>
